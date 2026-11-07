@@ -36,7 +36,38 @@ class Slider:
                 self.update_val(event.pos[0])
             elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 self.dragging = False
+            elif event.type == pygame.MOUSEMOTION and self.dragging:
+                self.update_val(event.pos[0])
+
+    def update_event(self, mouse_x):
+        rel_x = max(self.rect.left, min(mouse_x, self.rect.right)) - self.rect.left
+        ratio = rel_x / self.rect.width
+        self.handle_rect.centerx = self.rect.left + int(ratio * self.rect.width)
+
+    def draw(self, surface):
+        txt = f"{self.label}: {self.fmt.format(self.val)}"
+        lbl_surf = FONT_SMALL.render(txt, True, cfg.COLOR_TEXT)
+        surface.blit(lbl_surf, (self.rect.x, self.rect.y - 16))
+        pygame.draw.rect(surface, cfg.COLOR_SLIDER_BG, self.rect, border_radius=3)
+        pygame.draw.rect(surface, cfg.COLOR_SLIDER_HANDLE, self.handle_rect, border_radius=4)
+
+class Pumpkin:
+    def __init__(self):
+        self.radius = random.randint(14, 22)
+        self.pos = Vector2(random.randint(40, cfg.SCREEN_WIDTH - 40), random.randint(-300, -50))
+        self.vel = Vector2(random.uniform(-1.5, 1.5), random.uniform(2.0, 5.0))
+    def update(self):
+        self.pos += self.val
+        if self.pos.y > cfg.SCREEN_HEIGHT - cfg.GROUND_HEIGHT:
+                self.pos.y = random.randint(-200, -40)
+                self.pos.x = random.randint(40, cfg.SCREEN_WIDTH - 40)
+                self.pos.z = random.randint(2.0, 5.0)
                 
+
+
+
+
+
 
 
         
