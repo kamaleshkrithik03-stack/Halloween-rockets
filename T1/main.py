@@ -62,7 +62,50 @@ class Pumpkin:
                 self.pos.y = random.randint(-200, -40)
                 self.pos.x = random.randint(40, cfg.SCREEN_WIDTH - 40)
                 self.pos.z = random.randint(2.0, 5.0)
-                
+    def draw(self, surface):
+        x, y = int(self.pos.x), int(self.pos.y)
+        pygame.draw.polygon(surface, cfg.COLOR_PUMPKIN, (x, y), self.radius)
+        pygame.draw.rect(surface, (34, 139, 34), (x - 3, y - self.radius - 5, 6, 6))
+        eye_offset = self.radius // 3
+        pygame.draw.polygon(surface, (0, 0, 0), [(x - eye_offset, y - 3), (x - eye_offset, y - 3), (x - eye_offset - 4, y + 3), (x - eye_offset + 4, y + 3)])
+        pygame.draw.polygon(surface, (0, 0, 0), [(x + eye_offset, y - 3), (x + eye_offset, y + 3), (x + eye_offset + 4, y + 3)])
+        pygame.draw.polygon(surface, (0, 0, 0), [(x, y + 4), (x - 6, y + 10), (x + 6, y + 10)])
+
+class Simulation:
+    def __init__(self):
+        self.reset_rocket()
+        self.sliders = {
+            "kp": Slider(20, 40, 150, 10, 0.0, 5.0, cfg.KP_DEFAULT, "PID Kp", "{:.2f}"),   # AI copy pasted code from line 78 to line 82
+            "ki": Slider(20, 80, 150, 10, 0.0, 0.5, cfg.KI_DEFAULT, "PID Ki", "{:.3f}"),
+            "kd": Slider(20, 120, 150, 10, 0.0, 5.0, cfg.KD_DEFAULT, "PID Kd", "{:.2f}"),
+            "wind": Slider(20, 160, 150, 10, -10.0, 10.0, 0.0, "Wind Speed", "{:.1f} m/s"),
+            "mass": Slider(20, 200, 150, 10, 0.5, 3.0, cfg.ROCKET_DRY_MASS, "Dry Mass", "{:.2f} kg"),
+        }
+        self.health = cfg.MAX_HEALTH
+        self.pumpkins = [Pumpkin() for _ in range(7)]
+        self.parachute_deployed = False
+        self.game_over = False
+        self.landing_success = False
+        self.integral_error = 0.0
+        self.prev_error = 0.0
+
+    def reset_rocket(self):
+        self.pos = Vector2(cfg.SCREEN_WIDTH // 2, cfg.SCREEN_HEIGHT - cfg.GROUND_HEIGHT - cfg.ROCKET_HEIGHT // 2)
+        self.vel = Vector2(0.0, 0.0)
+        self.angle = 0.0
+        self.angular_vel = 0.0
+        self.tvc_gimbal = 0.0
+        self.fuel = cfg.FUEL_INITIAL
+        self.health = cfg.MAX_HEALTH
+        self.parachute_deployed = False 
+        self.game_over = False
+        self.landing_success = False
+        self.integral_error = 0.0
+        self.prev_error = 0.0
+    def calculate_com_cop(self):
+        self.pos = Vector2()
+
+
 
 
 
