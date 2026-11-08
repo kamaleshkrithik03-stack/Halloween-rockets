@@ -174,6 +174,21 @@ class Simulation:
         self.angle += self.angular_vel * dt
         self.angular_vel *= 0.98
 
+        ground_y = cfg.SCREEN_HEIGHT - cfg.SCREEN_WIDTH - cfg.ROCKET_HEIGHT // 2
+        if self.pos.y >= ground_y:
+            self.pos.y = ground_y
+            if self.vel.y < 8 and abs(self.angle) < 15.0:
+                self.landing_success = True
+            else:
+                self.landing_success = False
+            self.game_over = True
+            self.vel = Vector2(0, 0)
+
+        for pumpkin in self.pumpkins:
+            pumpkin.updates()
+               
+
+
 
 
 
