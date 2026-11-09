@@ -4,8 +4,12 @@ This game is a modification of my last week 3D sim(except it isnt 3D anymore)It 
 
 ## How to play
 
-Go to the release and download the zip and unzip it. Run the .exe and make sure you have the other 2 assets in the zip.
+Go to the release and download the zip and unzip it. Run the .exe and make sure you have the other 2 assets in the zip. 
+
 Use the arrow keys for game play and also be sure to not exceed 45 degrees or it is a crash
+
 press [P] for parachute
+
 pres [r] to reset
+
 press [space] or [enter] to launch
