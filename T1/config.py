@@ -14,13 +14,14 @@ COLOR_SLIDER_HANDLE = (200, 160, 50)
 
 GRAVITY = 9.80665 # I wanted to see what happens when g is to 5d.p
 AIR_DENSITY = 1.225 #this is at sea level, im adding a dynamic air density stuff as welll. the formulaas are so annoying 
+GROUND_HEIGHT = 60 #i came back to this halfway through main.py lol
 
 ROCKET_WIDTH = 24 #last week nightmares
 ROCKET_HEIGHT = 90
 ROCKET_DRY_MASS = 1.2 #seems like a ok weight for a payload and structure
-FUEL_INITIAL = 1.5
+FUEL_INITIAL = 5.5
 FUEL_BURN_RATE = 0.25
-THRUST_MAX = 4.0 #after this it has to be a spaceshot or a HPR
+THRUST_MAX = 100.0 #after this it has to be a spaceshot or a HPR
 MAX_TVC_ANGLE = 15.0
 
 CD_ROCKET = 0.4
@@ -32,6 +33,3 @@ KI_DEFAULT = 0.05
 KD_DEFAULT = 1.4
 
 MAX_HEALTH = 15 #now this is the game part
-
-
-
