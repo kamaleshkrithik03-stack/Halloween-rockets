@@ -297,9 +297,8 @@ class Simulation:
             chute_x = int(self.pos.x)
             chute_y = int(self.pos.y - self.camera_y - cfg.ROCKET_HEIGHT // 2 - 40)
             pygame.draw.arc(surface, (250, 69, 0), (chute_x - 30, chute_y - 20, 60, 40), 0, math.pi, 5)
-            pygame.draw.line(surface, (200, 200, 200), (chute_x - 28, chute_y), (int(self.pos.x), int(self.pos.y - cfg.ROCKET_HEIGHT // 2)), 1)
-            pygame.draw.line(surface, (200, 200, 200), (chute_x + 28, chute_y), (int(self.pos.x), int(self.pos.y - cfg.ROCKET_HEIGHT // 2)), 1)
-
+            pygame.draw.line(surface, (200, 200, 200), (chute_x - 28, chute_y), (int(self.pos.x), int(self.pos.y - self.camera_y - cfg.ROCKET_HEIGHT // 2)), 1)
+            pygame.draw.line(surface, (200, 200, 200), (chute_x + 28, chute_y), (int(self.pos.x), int(self.pos.y - self.camera_y - cfg.ROCKET_HEIGHT // 2)), 1)
         rocket_surf = pygame.Surface((cfg.ROCKET_WIDTH + 20, cfg.ROCKET_HEIGHT + 30), pygame.SRCALPHA)
         rx, ry = 10, 0
 
